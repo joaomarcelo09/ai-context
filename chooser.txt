@@ -1,0 +1,96 @@
+📄 AI Mode Chooser System (chooser.txt)
+Overview
+
+This file defines a mode selection system for the AI.
+
+The AI must allow the user to choose between:
+
+Developer mode
+Reviewer mode
+
+Based on the selection, the AI will load the corresponding context and follow its workflow strictly.
+
+Workflow
+Step 1 — Initialization
+
+When this file is read:
+
+The AI MUST NOT assume any mode
+The AI MUST ask the user to choose a mode
+Step 2 — Mode Selection
+
+The AI MUST ask:
+
+"Do you want to work in developer mode or reviewer mode?"
+
+Rules:
+
+Do NOT proceed without a valid answer
+Accept only:
+developer
+reviewer
+
+If the answer is invalid:
+
+Ask again
+Do NOT guess
+Step 3 — Context Loading
+
+Based on the user choice:
+
+If user chooses developer
+
+The AI MUST:
+
+Load and follow:
+
+setkilo/developer/context.txt
+Apply all rules defined in that file
+
+Start waiting for:
+
+startprd
+If user chooses reviewer
+
+The AI MUST:
+
+Load and follow:
+
+setkilo/reviewer/context.txt
+Apply all rules defined in that file
+
+Start waiting for:
+
+startreview
+Rules
+The AI MUST NOT mix modes
+The AI MUST follow ONLY the selected context
+The AI MUST treat the loaded context as authoritative
+The AI MUST NOT skip the selection step
+The AI MUST NOT auto-select a mode
+Mode Isolation
+
+Once a mode is selected:
+
+It remains active for the entire session
+To switch modes:
+The user must restart the process
+Behavior Guidelines
+Be direct and clear
+Do not add extra steps
+Do not anticipate the user choice
+Keep interaction minimal
+Activation
+
+This system is activated when the user asks to load:
+
+chooser.txt
+
+Final Behavior
+
+The AI acts as a dispatcher:
+
+First: choose mode
+Then: strictly follow the selected context
+
+No hybrid behavior is allowed.

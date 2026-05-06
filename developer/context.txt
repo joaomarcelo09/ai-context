@@ -1,0 +1,165 @@
+# AI Agent Task System (MCP-Driven)
+
+## Overview
+
+This system manages development tasks dynamically using external sources (MCP servers such as Notion).
+
+The workflow is task-first, not PRD-first.
+
+---
+
+## Core Principles
+
+* Tasks come from an external source (MCP)
+* The user chooses which task to work on
+* Each task has its own isolated PRD file
+* No global project memory file is used
+* The agent must remain structured and deterministic
+
+---
+
+## Workflow
+
+### Step 1 — Task Source Discovery
+
+At the beginning of a session, the AI MUST ask:
+
+1. Which MCP server should be used to fetch tasks?
+   (e.g., Notion MCP)
+
+The AI MUST NOT assume the source.
+
+---
+
+### Step 2 — Fetch Tasks
+
+After the user specifies the MCP:
+
+1. The AI retrieves the task list using MCP tools
+2. The AI presents a concise list of tasks
+
+   * title
+   * status (if available)
+   * short identifier (index or id)
+
+---
+
+### Step 3 — Task Selection
+
+The AI MUST ask:
+
+> "Which task do you want to work on?"
+
+The user selects ONE task.
+
+The AI MUST NOT proceed without explicit selection.
+
+---
+
+### Step 4 — PRD Creation
+
+Once a task is selected:
+
+1. The AI generates a PRD based on the selected task
+
+2. The PRD MUST be saved at:
+
+   setkilo/tasks/{task_name_resume}-prd.md
+
+3. The filename must:
+
+   * be lowercase
+   * use hyphens instead of spaces
+   * be a short summary of the task
+
+---
+
+### PRD Structure (STRICT)
+
+The PRD MUST follow exactly this structure:
+
+* Title
+* Objective
+* Scope
+* User Input Summary
+* Technical Plan
+* Affected Files
+* Risks / Notes
+
+Rules:
+
+* Keep it concise
+* Do not invent extra sections
+* Do not reuse previous PRDs
+
+---
+
+### Step 5 — Approval Gate
+
+After generating the PRD, the AI MUST ask:
+
+> "Can I proceed with this PRD?"
+
+If YES:
+
+* Start implementation
+
+If NO:
+
+* Update PRD based on feedback
+* Ask again
+
+---
+
+### Step 6 — Implementation
+
+During implementation:
+
+* Follow the PRD strictly
+* Do not introduce unrelated changes
+* Keep consistency with the repository
+
+## Task Isolation Rules (STRICT)
+
+* Each selected task = new PRD file
+* Never reuse or overwrite another task PRD
+* Never merge multiple tasks into one PRD
+
+---
+
+## Behavior Guidelines
+
+* Be direct and structured
+* Ask minimal but necessary questions
+* Do not assume missing information
+* Prioritize clarity over verbosity
+
+---
+
+## Enforcement Rules
+
+* If no MCP is defined → ask for it
+* If no task is selected → block execution
+* If user tries to skip PRD → enforce PRD creation
+* Always require approval before implementation
+
+---
+
+## File Rules
+
+The AI is ONLY allowed to create or modify:
+
+* setkilo/tasks/{task_name}-prd.md
+
+No other system files should be touched unless explicitly requested.
+
+---
+
+## Goal
+
+Create a clean, scalable, task-driven workflow where:
+
+* Tasks come from MCP
+* Each task has its own PRD
+* The user stays in control of execution
+
