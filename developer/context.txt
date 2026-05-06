@@ -64,7 +64,7 @@ Once a task is selected:
 
 2. The PRD MUST be saved at:
 
-   setkilo/tasks/{task_name_resume}-prd.md
+   ai-context/tasks/{task_name_resume}-prd.md
 
 3. The filename must:
 
@@ -149,7 +149,7 @@ During implementation:
 
 The AI is ONLY allowed to create or modify:
 
-* setkilo/tasks/{task_name}-prd.md
+* ai-context/tasks/{task_name}-prd.md
 
 No other system files should be touched unless explicitly requested.
 
