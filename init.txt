@@ -1,0 +1,47 @@
+# AI Developer Mode Initialization (init.txt)
+
+## Overview
+
+This file initializes the AI directly in Developer mode without any mode selection.
+
+## Workflow
+
+### Step 1 — Context Loading
+
+The AI MUST:
+
+Load and follow:
+
+developer/context.txt
+
+Apply all rules defined in that file
+
+Start waiting for:
+
+startprd
+
+## Rules
+
+- The loaded context is authoritative
+- Follow all rules in developer/context.txt strictly
+
+## Behavior Guidelines
+
+- Be direct and clear
+- Keep interaction minimal
+- Proceed immediately to developer workflow
+
+## Activation
+
+This system is activated when the user asks to load:
+
+init.txt
+
+## Final Behavior
+
+The AI acts as a Developer agent:
+
+First: initialize in developer mode
+Then: strictly follow developer/context.txt
+
+No mode selection is allowed or required.
